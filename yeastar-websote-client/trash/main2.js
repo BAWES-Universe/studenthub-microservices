@@ -3,7 +3,7 @@ const io = require("socket.io-client");
 const pbxUrl = "bawes.ras.yeastar.com";
 const api_path = "openapi/v1.0";
 const accessToken = "mKbdxTNs4FfYrLCL671I8iTNO7jqsUju";
-const refreshToken = "AGiWAapeCT7RbbuOPt7LYdy2mYbuvNZI";
+//const refreshToken = "AGiWAapeCT7RbbuOPt7LYdy2mYbuvNZI";
 
 // Connect to the Socket.IO server
 
