@@ -22,6 +22,7 @@ gh repo clone plugnio/studenthub-microservices
 node.js
 ------------------
 sudo apt-get install -y nodejs
+sudo apt-get install -y npm
 
 to set production env
 ------------------
@@ -33,6 +34,6 @@ sudo chmod -R a+rw /home/ubuntu/.npm
 
 docker 
 ------------------
-sudo apt install docker.io
+sudo apt install -y docker.io
 docker build -t yeastar-websote-client .
-docker run  yeastar-websote-client //-p 3000:3000
+docker run yeastar-websote-client //-p 3000:3000
