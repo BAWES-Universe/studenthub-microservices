@@ -2,9 +2,6 @@
 # todo 
 
 1) setup sentry 
-2) setup event streaming service 
-3) setup script in server and make working 
-4) on server close/ problem try to reconnect 
 
 # AWS 
 
