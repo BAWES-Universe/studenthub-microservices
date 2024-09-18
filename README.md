@@ -32,8 +32,20 @@ fix npm for non-docker use
 ------------------
 sudo chmod -R a+rw /home/ubuntu/.npm
 
-docker 
+
+# docker 
 ------------------
 sudo apt install -y docker.io
 docker build -t yeastar-websote-client .
 docker run yeastar-websote-client //-p 3000:3000
+
+
+## stop & update 
+
+docker pull <image_name>:<tag> or git pull && docker build -t yeastar-websote-client .
+
+docker ps 
+docker stop <container_name_or_id>
+docker rm <container_name_or_id>
+
+docker run -d yeastar-websote-client //-p 3000:3000

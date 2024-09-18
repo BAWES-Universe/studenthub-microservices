@@ -204,4 +204,9 @@ async function processEvent(data) {
   //send event 
 
   sendMessageToSQS(params)
+
+  //todo: save to s3 
+
+  //get recorded wav file path from event 
+  
 }
