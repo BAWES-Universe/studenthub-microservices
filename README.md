@@ -18,6 +18,8 @@ gh auth login
 
 gh repo clone plugnio/studenthub-microservices
 
+### to reset file
+git checkout -- yeastar-voicemails/token.txt
 
 node.js
 ------------------
