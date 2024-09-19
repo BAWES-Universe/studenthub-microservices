@@ -12,10 +12,13 @@ to run app
 
 `node main.js`
 
+path in linux 
+
+node /var/www/studenthub-microservices/yeastar-voicemails/console/sync.js
+node /var/www/studenthub-microservices/yeastar-voicemails/console/process.js
 
 TODO: 
-- update s3 credentials for production
-- server setup 
-- studenthub main repo to this repo connection for production
-
+- studenthub update
+- cron job setup in server
 - handling token expiry 
+

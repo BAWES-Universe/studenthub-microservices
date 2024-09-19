@@ -19,4 +19,6 @@ const { syncVoiceMails } = require('../lib/helper');
     const result = await syncVoiceMails();
 
     console.log("result", result);
+
+    process.exit();
 })();     

@@ -49,3 +49,19 @@ docker stop <container_name_or_id>
 docker rm <container_name_or_id>
 
 docker run -d yeastar-websote-client //-p 3000:3000
+
+## pm2 
+
+npm install pm2@latest -g
+pm2 start main.js --name yeaster 
+
+### To ensure pm2 restarts your Node.js app when the server reboots, use:
+pm2 startup
+pm2 save
+
+### Useful pm2 Commands:
+List running processes: pm2 list
+Restart an app: pm2 restart my-app
+Stop an app: pm2 stop my-app
+View logs: pm2 logs
+
