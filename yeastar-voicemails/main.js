@@ -1,3 +1,6 @@
+require("./instrument");
+const Sentry = require("@sentry/node");
+
 const express = require('express');
 const dotenv = require('dotenv');
 
@@ -9,6 +12,10 @@ const connectToDatabase = require('./lib/mongodb');
 
 const app = express();
 const port = 3001;
+
+// Add this after all routes,
+// but before any and other error-handling middlewares are defined
+Sentry.setupExpressErrorHandler(app);
 
 app.use((req, res, next) => {
     //console.log('Time:', Date.now())

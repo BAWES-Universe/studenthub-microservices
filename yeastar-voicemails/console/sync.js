@@ -2,6 +2,8 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+require("../instrument");
+
 const { getAccessToken } = require('../lib/yeastar');
 const connectToDatabase = require('../lib/mongodb');
 const { syncVoiceMails } = require('../lib/helper');

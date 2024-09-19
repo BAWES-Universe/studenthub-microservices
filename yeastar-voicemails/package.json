@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@sentry/node": "^8.30.0",
+    "@sentry/profiling-node": "^8.30.0",
     "aws-sdk": "^2.1691.0",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",

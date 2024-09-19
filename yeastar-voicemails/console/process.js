@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+require("../instrument");
 const { getAccessToken, getToken, downloadVoicemail } = require('../lib/yeastar');
 const { voiceMailModel } = require('../lib/helper');
 const connectToDatabase = require('../lib/mongodb');

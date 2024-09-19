@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+require("./instrument");
 
 //const Kafka = require('node-rdkafka');
 const mongoose = require("mongoose");
