@@ -4,6 +4,8 @@ const Sentry = require("@sentry/node");
 const express = require('express');
 const dotenv = require('dotenv');
 
+const cors = require('cors');
+
 dotenv.config();
 
 const { getAccessToken, getToken, downloadVoicemail } = require('./lib/yeastar');
@@ -12,6 +14,12 @@ const connectToDatabase = require('./lib/mongodb');
 
 const app = express();
 const port = 3001;
+
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+// Enable CORS for all routes
+app.use(cors());
+ 
 
 // Add this after all routes,
 // but before any and other error-handling middlewares are defined

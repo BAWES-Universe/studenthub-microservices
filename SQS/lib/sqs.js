@@ -26,8 +26,16 @@ const sendMessageToSQS = async (message, queue = process.env.AWS_SQS_QUEUE) => {
   try {
     const data = await sqs.sendMessage(params).promise();
     console.log('Message sent, MessageId:', data.MessageId);
+    return {
+      operation: "success",
+      data: data
+    };
   } catch (error) {
     console.error('Error sending message:', error);
+    return {
+      operation: "error",
+      message: error
+    };
   }
 };
 
