@@ -1,7 +1,15 @@
-./png "http://localhost:8888/bawes/studenthub/staff/web/v1/candidate-id-cards/1/BjE4JvIxqgIO3SiNyNpTPdIzK6YwWLlm" "." 
+# cron to process 
 
+   * * * * * ./var/www/studenthub-microservices/html-to-png/build/process-id-request-dev >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
 
-./png "http://localhost:8888/bawes/studenthub/staff/web/v1/candidate-id-cards/1/BjE4JvIxqgIO3SiNyNpTPdIzK6YwWLlm" "." 
+   * * * * * ./var/www/studenthub-microservices/html-to-png/build/process-id-request-prod >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
 
+## dev server
+cp .env.dev-server-docker .env.local && go build -o build/process-id-request-dev .
 
-./png-linux-386 https://staff.api.dev.studenthub.co/v1/candidate-id-cards/8/yGVo9g1t4urP9ScpxP1A2yMwUuNN7hl6 .
+## prod server
+cp .env.prod-server-docker .env.local && go build -o build/process-id-request-prod .
+
+# TODO
+- on failure, mark as failed
+- on pick mark as processing so other cron jobs don't pick it up
