@@ -4,6 +4,8 @@ const Sentry = require("@sentry/node");
 const express = require('express');
 const dotenv = require('dotenv');
 
+const cors = require('cors');
+
 dotenv.config();
 
 const { getAccessToken, getToken, downloadVoicemail } = require('./lib/yeastar');
@@ -13,6 +15,12 @@ const connectToDatabase = require('./lib/mongodb');
 const app = express();
 const port = 3001;
 
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+// Enable CORS for all routes
+app.use(cors());
+ 
+
 // Add this after all routes,
 // but before any and other error-handling middlewares are defined
 Sentry.setupExpressErrorHandler(app);
@@ -20,9 +28,7 @@ Sentry.setupExpressErrorHandler(app);
 app.use((req, res, next) => {
     //console.log('Time:', Date.now())
     const token = req.headers["authorization"];
-
-    console.log(req.headers, token);
-
+ 
     if (token == "Bearer QstN8_18LmILpl37r2zvdDCp5JjWPCNh") {
         return next();
     }
@@ -41,6 +47,7 @@ app.use((req, res, next) => {
     await connectToDatabase(); 
   })(); */
  
+
 app.get("/sync", async (req, res) => {
     await getAccessToken();
     

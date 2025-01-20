@@ -67,3 +67,47 @@ Restart an app: pm2 restart my-app
 Stop an app: pm2 stop my-app
 View logs: pm2 logs
 
+# nginx 
+
+sudo vim /etc/nginx/sites-available/default
+
+## Configuration for listening on port 80 for /yeastar-voicemails path
+server {
+    listen 80;
+
+    location /yeastar-voicemails/ {
+        proxy_pass http://localhost:3001/;  # Example: Forwarding requests to an API running on port 3001
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+ 
+## Default server block for other traffic (optional)
+server {
+    listen 80;
+    
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+}
+
+## ubuntu firewall 
+
+sudo ufw allow 8080
+sudo ufw allow 8090
+
+## test config 
+
+sudo nginx -t
+
+## restart nginx 
+
+sudo systemctl restart nginx
+
+## test 
+
+curl --location 'https://microservices.studenthub.co/yeastar-voicemails/list' \
+--header 'Authorization: Bearer QstN8_18LmILpl37r2zvdDCp5JjWPCNh'

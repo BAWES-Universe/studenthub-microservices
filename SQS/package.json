@@ -1,6 +1,10 @@
 {
   "dependencies": {
+    "@sentry/node": "^8.32.0",
+    "@sentry/profiling-node": "^8.32.0",
     "aws-sdk": "^2.1689.0",
-    "dotenv": "^16.4.5"
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.7"
   }
 }
