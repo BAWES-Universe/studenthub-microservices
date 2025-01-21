@@ -41,7 +41,7 @@ func main() {
 	defer db.Close()
 
 	// Query the data and mark as processing
-	rows, err := db.Query("SELECT cir_uuid, candidate_ids FROM candidate_id_request where status = 'pending' limit 1 FOR UPDATE")
+	rows, err := db.Query("SELECT cir_uuid, candidate_ids, created_by FROM candidate_id_request where status = 'pending' limit 1 FOR UPDATE")
 
 	if err != nil {
 		log.Fatal(err)
@@ -86,7 +86,8 @@ func main() {
 
 		var candidate_ids string
 		var cir_uuid string
-		if err := rows.Scan(&cir_uuid, &candidate_ids); err != nil {
+		var created_by string
+		if err := rows.Scan(&cir_uuid, &candidate_ids, &created_by); err != nil {
 			log.Fatal(err)
 		}
 
@@ -116,7 +117,13 @@ func main() {
 				log.Fatal(err)
 			}
 
-			url := fmt.Sprintf("%s/candidate-id-cards/%s/BjE4JvIxqgIO3SiNyNpTPdIzK6YwWLlm", os.Getenv("STAFF_API_ENDPOINT"), id)
+			var token_value string
+			err = db.QueryRow("SELECT token_value FROM staff_token WHERE staff_id = ?", created_by).Scan(&token_value)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			url := fmt.Sprintf("%s/candidate-id-cards/%s/%s", os.Getenv("STAFF_API_ENDPOINT"), id, token_value)
 
 			fmt.Println(url)
 			//(1)
