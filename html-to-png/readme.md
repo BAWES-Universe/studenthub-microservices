@@ -1,25 +1,25 @@
 # Setup 
 
 ## dev server
-cp .env.dev-server-docker .env.local && go build -o build/process-id-request-dev .
+cp .env.dev-server-docker ./build/dev/.env.local && go build -o build/dev/process-id-request .
 
 ## prod server
-cp .env.prod-server-docker .env.local && go build -o build/process-id-request-prod .
+cp .env.prod-server-docker ./build/prod/.env.local && go build -o build/prod/process-id-request .
 
 ## cron to process 
 
-   `* * * * * /var/www/studenthub-microservices/html-to-png/build/process-id-request-dev >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
+   `* * * * * cd /var/www/studenthub-microservices/html-to-png/build/dev && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
    
-   * * * * * sleep 20; /var/www/studenthub-microservices/html-to-png/build/process-id-request-dev >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
+   * * * * * sleep 20; cd /var/www/studenthub-microservices/html-to-png/build/dev && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
 
-   * * * * * sleep 40; /var/www/studenthub-microservices/html-to-png/build/process-id-request-dev >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
+   * * * * * sleep 40; cd /var/www/studenthub-microservices/html-to-png/build/dev && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
    `
 
-   `* * * * * /var/www/studenthub-microservices/html-to-png/build/process-id-request-prod >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
+   `* * * * * cd /var/www/studenthub-microservices/html-to-png/build/prod && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
    
-   * * * * * sleep 20; /var/www/studenthub-microservices/html-to-png/build/process-id-request-prod >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
+   * * * * * sleep 20; cd /var/www/studenthub-microservices/html-to-png/build/prod  && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
    
-   * * * * * sleep 40; /var/www/studenthub-microservices/html-to-png/build/process-id-request-prod >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1`
+   * * * * * sleep 40; cd /var/www/studenthub-microservices/html-to-png/build/prod && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1`
 
   - https://www.checkmateq.com/blog/schedule-a-cron-job-for-seconds#:~:text=By%20default%20cronjob%20cannot%20be,to%20schedule%20it%20for%20seconds. 
 
@@ -44,6 +44,8 @@ source ~/.bashrc
 
 `mysql -u root -pstudenthub -h ec2-35-179-168-33.eu-west-2.compute.amazonaws.com -P 3307 `
 
+mysql -u bawes  -h studenthub-prod.cluster-c8mekjvvbygf.eu-west-2.rds.amazonaws.com -P 3306
+-pbawes12student!hub
 # TODO
 - on failure, mark as failed
 - on pick mark as processing so other cron jobs don't pick it up

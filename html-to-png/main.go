@@ -50,7 +50,7 @@ func main() {
 	defer db.Close()
 
 	// Query the data and mark as processing
-	rows, err := db.Query("SELECT cir_uuid, candidate_ids, created_by FROM candidate_id_request where status = 'pending' limit 1 FOR UPDATE")
+	rows, err := db.Query("SELECT cir_uuid, candidate_ids, created_by FROM candidate_id_request where status = 'pending' limit 6 FOR UPDATE")
 
 	if err != nil {
 		log.Fatal(err)
