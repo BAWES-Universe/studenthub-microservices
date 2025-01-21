@@ -173,6 +173,7 @@ func main() {
 			Bucket: aws.String(os.Getenv("AWS_BUCKET")),
 			Key:    aws.String(fmt.Sprintf("id-cards/%s.zip", cir_uuid)),
 			Body:   bytes.NewReader(zbuf.Bytes()),
+			ACL:    aws.String("public-read"),
 		})
 		if err != nil {
 			log.Fatal(err)
