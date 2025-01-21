@@ -8,9 +8,20 @@ cp .env.prod-server-docker .env.local && go build -o build/process-id-request-pr
 
 ## cron to process 
 
-   * * * * * ./var/www/studenthub-microservices/html-to-png/build/process-id-request-dev >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
+   `* * * * * /var/www/studenthub-microservices/html-to-png/build/process-id-request-dev >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
+   
+   * * * * * sleep 20; /var/www/studenthub-microservices/html-to-png/build/process-id-request-dev >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
 
-   * * * * * ./var/www/studenthub-microservices/html-to-png/build/process-id-request-prod >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
+   * * * * * sleep 40; /var/www/studenthub-microservices/html-to-png/build/process-id-request-dev >> /var/www/studenthub-microservices/html-to-png/logs/dev.log 2>&1
+   `
+
+   `* * * * * /var/www/studenthub-microservices/html-to-png/build/process-id-request-prod >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
+   
+   * * * * * sleep 20; /var/www/studenthub-microservices/html-to-png/build/process-id-request-prod >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
+   
+   * * * * * sleep 40; /var/www/studenthub-microservices/html-to-png/build/process-id-request-prod >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1`
+
+  - https://www.checkmateq.com/blog/schedule-a-cron-job-for-seconds#:~:text=By%20default%20cronjob%20cannot%20be,to%20schedule%20it%20for%20seconds. 
 
 # Go environment
 nano ~/.bashrc

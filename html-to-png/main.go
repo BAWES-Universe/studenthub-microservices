@@ -25,7 +25,16 @@ import (
 
 func main() {
 
-	err := godotenv.Load(".env.local")
+	// Get the current working directory
+	cwd, err := os.Getwd()
+	if err != nil {
+		log.Fatalf("Error getting current working directory: %v", err)
+	}
+
+	// Construct the path to the .env file
+	envPath := cwd + "/.env.local"
+
+	err = godotenv.Load(envPath)
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
