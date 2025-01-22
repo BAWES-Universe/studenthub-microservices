@@ -58,6 +58,10 @@ func main() {
 	defer rows.Close()
 
 	// Initialize AWS session
+	/*sess := session.Must(session.NewSessionWithOptions(session.Options{
+		SharedConfigState: session.SharedConfigEnable,
+	}))*/
+
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String(os.Getenv("AWS_REGION")),
 		Credentials: credentials.NewStaticCredentials(
@@ -66,6 +70,7 @@ func main() {
 			"",
 		),
 	})
+
 	if err != nil {
 		log.Fatal(err)
 	}
