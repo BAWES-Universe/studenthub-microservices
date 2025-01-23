@@ -60,7 +60,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer rows.Close()
+	defer func(rows *sql.Rows) {
+		err := rows.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(rows)
 
 	// Initialize AWS session
 	/*sess := session.Must(session.NewSessionWithOptions(session.Options{
@@ -127,7 +132,12 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		defer rows.Close()
+		defer func(rows *sql.Rows) {
+			err := rows.Close()
+			if err != nil {
+				log.Fatal(err)
+			}
+		}(rows)
 
 		for rows.Next() {
 			var id string
@@ -200,10 +210,12 @@ func main() {
 
 		// Upload to S3
 		_, err = svc.PutObject(&s3.PutObjectInput{
-			Bucket: aws.String(os.Getenv("AWS_BUCKET")),
-			Key:    aws.String(fmt.Sprintf("id-cards/%s.zip", cir_uuid)),
-			Body:   bytes.NewReader(zbuf.Bytes()),
-			ACL:    aws.String("public-read"),
+			Bucket:        aws.String(os.Getenv("AWS_BUCKET")),
+			Key:           aws.String(fmt.Sprintf("id-cards/%s.zip", cir_uuid)),
+			Body:          bytes.NewReader(zbuf.Bytes()),
+			ACL:           aws.String("public-read"),
+			ContentLength: aws.Int64(int64(len(zbuf.Bytes()))), // Ensure correct length
+			ContentType:   aws.String("application/zip"),       // Correct MIME type
 		})
 		if err != nil {
 			log.Fatal(err)
@@ -241,9 +253,9 @@ func elementScreenshot(urlstr, sel string, res *[]byte) chromedp.Tasks {
 //
 // Note: chromedp.FullScreenshot overrides the device's emulation settings. Use
 // device.Reset to reset the emulation and viewport settings.
-func fullScreenshot(urlstr string, quality int, res *[]byte) chromedp.Tasks {
+/*func fullScreenshot(urlstr string, quality int, res *[]byte) chromedp.Tasks {
 	return chromedp.Tasks{
 		chromedp.Navigate(urlstr),
 		chromedp.FullScreenshot(res, quality),
 	}
-}
+}*/
