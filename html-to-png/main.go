@@ -170,16 +170,18 @@ func main() {
 				log.Fatal(err)
 			}
 
+			log.Printf("Size of front buffer before upload: %d bytes", len(buf))
+
 			_, err = f.Write(buf)
 			if err != nil {
 				log.Fatal(err)
 			}
 
 			// Reinitialize buffer for the next screenshot
-			buf = nil
+			var bbuf []byte
 
 			// Capture screenshot of the back card
-			if err := chromedp.Run(ctx, elementScreenshot(url, `div.back-card`, &buf)); err != nil {
+			if err := chromedp.Run(ctx, elementScreenshot(url, `div.back-card`, &bbuf)); err != nil {
 				log.Fatal(err)
 			}
 
@@ -188,7 +190,9 @@ func main() {
 				log.Fatal(err)
 			}
 
-			_, err = f.Write(buf)
+			log.Printf("Size of back buffer before upload: %d bytes", len(bbuf))
+
+			_, err = f.Write(bbuf)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -207,6 +211,8 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		log.Printf("Size of zip buffer before upload: %d bytes", len(zbuf.Bytes()))
 
 		// Upload to S3
 		_, err = svc.PutObject(&s3.PutObjectInput{

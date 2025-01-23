@@ -15,12 +15,12 @@ cp .env.prod-server-docker ./build/prod/.env.local && go build -o build/prod/pro
    * * * * * sleep 40; cd /var/www/studenthub-microservices/html-to-png/build/dev && ./process-id-request > /dev/null 2>&1
    `
 
-   `* * * * * cd /var/www/studenthub-microservices/html-to-png/build/prod && ./process-id-request > /dev/null 2>&1   
-* * * * * sleep 10; cd /var/www/studenthub-microservices/html-to-png/build/prod  && ./process-id-request > /dev/null 2>&1
-* * * * * sleep 20; cd /var/www/studenthub-microservices/html-to-png/build/prod && ./process-id-request > /dev/null 2>&1
-* * * * * sleep 30; cd /var/www/studenthub-microservices/html-to-png/build/prod && ./process-id-request > /dev/null 2>&1   
-* * * * * sleep 40; cd /var/www/studenthub-microservices/html-to-png/build/prod  && ./process-id-request > /dev/null 2>&1
-* * * * * sleep 50; cd /var/www/studenthub-microservices/html-to-png/build/prod && ./process-id-request > /dev/null 2>&1
+   `* * * * * cd /var/www/studenthub-microservices/html-to-png/build/prod && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1     
+* * * * * sleep 10; cd /var/www/studenthub-microservices/html-to-png/build/prod  && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
+* * * * * sleep 20; cd /var/www/studenthub-microservices/html-to-png/build/prod && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
+* * * * * sleep 30; cd /var/www/studenthub-microservices/html-to-png/build/prod && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1   
+* * * * * sleep 40; cd /var/www/studenthub-microservices/html-to-png/build/prod  && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
+* * * * * sleep 50; cd /var/www/studenthub-microservices/html-to-png/build/prod && ./process-id-request >> /var/www/studenthub-microservices/html-to-png/logs/prod.log 2>&1
 `
 
 
