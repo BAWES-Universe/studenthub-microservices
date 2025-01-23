@@ -128,7 +128,7 @@ func main() {
 		zipWriter := zip.NewWriter(zbuf)
 
 		// Loop through the data
-		rows, err := db.Query("SELECT id, candidate_id FROM candidate_id_card WHERE candidate_id IN (" + candidate_ids + ")")
+		crows, err := db.Query("SELECT id, candidate_id FROM candidate_id_card WHERE candidate_id IN (" + candidate_ids + ")")
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -137,12 +137,12 @@ func main() {
 			if err != nil {
 				log.Fatal(err)
 			}
-		}(rows)
+		}(crows)
 
-		for rows.Next() {
+		for crows.Next() {
 			var id string
 			var candidate_id string
-			if err := rows.Scan(&id, &candidate_id); err != nil {
+			if err := crows.Scan(&id, &candidate_id); err != nil {
 				log.Fatal(err)
 			}
 

@@ -37,6 +37,12 @@ source ~/.bashrc
 
 # pre-requisites
 - install chromium-browser in microservice server
+    apt-get install -y libx11-xcb1 libxcomposite1 libxrandr2 \
+      libxi6 libatk-bridge2.0-0 libgtk-3-0 libnss3 libxss1 \
+      liboss4-salsa-asound2 fonts-liberation libxcb1 gdebi-core
+
+    sudo apt-get install -y xvfb
+
 - allow mysql access from main EC2 instance for dev server
   `sudo ufw status`
   `sudo ufw enable`
