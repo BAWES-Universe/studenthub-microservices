@@ -47,7 +47,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer db.Close()
+	defer func(db *sql.DB) {
+		err := db.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(db)
 
 	// Query the data and mark as processing
 	rows, err := db.Query("SELECT cir_uuid, candidate_ids, created_by FROM candidate_id_request where status = 'pending' limit 6 FOR UPDATE")
@@ -140,10 +145,11 @@ func main() {
 			url := fmt.Sprintf("%s/candidate-id-cards/%s/%s", os.Getenv("STAFF_API_ENDPOINT"), id, token_value)
 
 			fmt.Println(url)
-			//(1)
-			// capture screenshot of an element
+
+			// Initialize a new buffer for each screenshot
 			var buf []byte
 
+			// Capture screenshot of the front card
 			if err := chromedp.Run(ctx, elementScreenshot(url, `div.front-card`, &buf)); err != nil {
 				log.Fatal(err)
 			}
@@ -159,6 +165,10 @@ func main() {
 				log.Fatal(err)
 			}
 
+			// Reinitialize buffer for the next screenshot
+			buf = nil
+
+			// Capture screenshot of the back card
 			if err := chromedp.Run(ctx, elementScreenshot(url, `div.back-card`, &buf)); err != nil {
 				log.Fatal(err)
 			}
@@ -180,7 +190,6 @@ func main() {
 			if err := os.WriteFile("fullScreenshot.png", buf, 0o644); err != nil {
 				log.Fatal(err)
 			}*/
-
 		}
 
 		// Make sure to check the error on Close.
@@ -217,6 +226,7 @@ func main() {
 	elapsed := time.Since(start)
 	fmt.Printf("Total time taken: %s\n", elapsed)
 	//log.Printf("wrote front-card.png and back-card.png")
+
 }
 
 // elementScreenshot takes a screenshot of a specific element.
