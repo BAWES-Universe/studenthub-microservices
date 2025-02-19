@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Linear API",
   "main": "main.ts",
+  "type": "module",
   "scripts": {
     "start": "pm2 start main.ts --name 'linear-api' --interpreter ts-node",
     "dev": "nodemon main.ts",
