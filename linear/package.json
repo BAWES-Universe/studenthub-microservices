@@ -2,11 +2,12 @@
   "name": "linear",
   "version": "1.0.0",
   "description": "Linear API",
-  "main": "main.mts",
+  "main": "main.ts",
   "type": "module",
   "scripts": {
-    "start": "pm2 start main.mts --name 'linear-api' --interpreter ts-node",
-    "dev": "nodemon main.mts",
+    "start": "node main.ts",
+    "start-pm2": "pm2 start --interpreter ts-node --name 'linear-api' main.ts",
+    "dev": "nodemon --exec 'ts-node' main.ts",
     "build": "tsc",
     "stop": "pm2 stop linear-api",
     "restart": "pm2 restart linear-api"

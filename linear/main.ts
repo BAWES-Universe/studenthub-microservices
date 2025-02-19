@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import * as Sentry from "@sentry/node";
 import dotenv from 'dotenv';
-import './instrument.mts';
+//import * as _ from './instrument';
 
 const app: express.Application = express()
 const port = 3002
