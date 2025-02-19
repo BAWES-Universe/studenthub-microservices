@@ -1,0 +1,29 @@
+{
+  "name": "linear",
+  "version": "1.0.0",
+  "description": "Linear API",
+  "main": "main.ts",
+  "scripts": {
+    "start": "pm2 start main.ts --name 'linear-api' --interpreter ts-node",
+    "dev": "nodemon main.ts",
+    "build": "tsc",
+    "stop": "pm2 stop linear-api",
+    "restart": "pm2 restart linear-api"
+  },
+  "dependencies": {
+    "@linear/sdk": "^38.0.0",
+    "@sentry/node": "^9.1.0",
+    "@sentry/profiling-node": "^9.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pm2": "^5.4.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2"
+  }
+}
