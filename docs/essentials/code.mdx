@@ -1,0 +1,80 @@
+---
+title: 'Code Essentials'
+description: 'Guidelines and best practices for writing and managing code within the project.'
+icon: 'code'
+---
+
+## Code Structure
+
+When structuring your code, aim for readability and maintainability. This means organizing your code in a way that makes it easy for others (and future you) to understand and modify. Use meaningful names for variables, functions, and classes. Break down large functions into smaller, more manageable pieces.
+
+### Best Practices
+
+- **Consistency:** Follow a consistent coding style. This includes naming conventions, file structure, and formatting.
+- **Comments:** Use comments to explain the "why" behind your code. Avoid stating the obvious.
+- **DRY Principle:** Don't Repeat Yourself. Reuse code as much as possible through functions, classes, and modules.
+
+```typescript
+// Good example of a well-structured function
+function calculateArea(width: number, height: number): number {
+    return width * height;
+}
+```
+
+## Reusable Components
+
+Creating reusable components not only saves time but also ensures consistency across your project. When building components, consider their flexibility and how they might be used in different contexts.
+
+### Example
+
+```typescript
+// A simple reusable Button component in React
+import React from 'react';
+
+interface ButtonProps {
+    label: string;
+    onClick: () => void;
+}
+
+const Button: React.FC<ButtonProps> = ({ label, onClick }) => (
+    <button onClick={onClick}>{label}</button>
+);
+
+export default Button;
+```
+
+## Code Snippets
+
+Leverage code snippets for common tasks to speed up your development process. Snippets can be a powerful tool for sharing knowledge within your team or the developer community.
+
+### Inline Code
+
+To denote a `word` or `phrase` as code, enclose it in backticks (`).
+
+```
+To denote a `word` or `phrase` as code, enclose it in backticks (`).
+```
+
+### Code Block
+
+Use fenced code blocks by enclosing code in three backticks. Specify the programming language of your snippet to enable syntax highlighting.
+
+```java HelloWorld.java
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+
+````md
+```java HelloWorld.java
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+````
+
+Remember, the goal is to write code that is not only functional but also clean, understandable, and maintainable. Following these guidelines will help you achieve that.
