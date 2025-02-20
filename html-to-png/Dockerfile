@@ -26,7 +26,8 @@ WORKDIR /app
 COPY --from=builder /app/png-linux .
 
 # Expose the port the app runs on
-#EXPOSE 8080
+EXPOSE 8080
 
-# Command to run the executable
+# Command to run the executable or keep container running
+CMD ["tail", "-f", "/dev/null"]
 #CMD ["./png-linux"]

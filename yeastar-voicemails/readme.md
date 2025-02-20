@@ -17,6 +17,9 @@ path in linux
 node /var/www/studenthub-microservices/yeastar-voicemails/console/sync.js
 node /var/www/studenthub-microservices/yeastar-voicemails/console/process.js
 
+cron 
+*/5 * * * * /usr/bin/node /var/www/studenthub-microservices/yeastar-voicemails/console/sync.js && /usr/bin/node /var/www/studenthub-microservices/yeastar-voicemails/console/process.js
+
 TODO: 
 - studenthub update
 - cron job setup in server
