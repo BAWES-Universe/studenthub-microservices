@@ -147,7 +147,7 @@ func main() {
 			}
 
 			var token_value string
-			err = db.QueryRow("SELECT token_value FROM staff_token WHERE staff_id = ?", created_by).Scan(&token_value)
+			err = db.QueryRow("SELECT token_value FROM staff_token WHERE token_expiry_datetime > NOW() AND token_status = 1 AND staff_id = ?", created_by).Scan(&token_value)
 			if err != nil {
 				log.Fatal(err)
 			}
