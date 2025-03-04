@@ -1,8 +1,11 @@
 # Start with the official Golang image to build the Go application
 FROM golang:1.23 AS builder
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y \
-    cron 
+# Install cron with cleanup in the same layer to reduce image size
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends cron && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -14,8 +17,9 @@ RUN go mod tidy
 # Copy the rest of the application source code
 COPY . .
 
-# Build the Go application
-RUN go build -o process-id-request 
+# Build the Go application with optimizations
+RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o process-id-request
+
 #GOOS=linux GOARCH=386 
 # arm
 # ref: https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04
