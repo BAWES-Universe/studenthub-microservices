@@ -127,3 +127,8 @@ sudo systemctl restart nginx
 
 curl --location 'https://microservices.studenthub.co/yeastar-voicemails/list' \
 --header 'Authorization: Bearer QstN8_18LmILpl37r2zvdDCp5JjWPCNh'
+
+# ssh into docker container 
+
+`docker exec -it fb30d490b5e2 /bin/bash`
+

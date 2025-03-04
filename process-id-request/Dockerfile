@@ -12,22 +12,24 @@ RUN go mod tidy
 COPY . .
 
 # Build the Go application
-RUN GOOS=linux GOARCH=386 go build -o png-linux 
+RUN GOOS=linux GOARCH=386 go build -o process-id-request 
 # arm
 # ref: https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms-on-ubuntu-16-04
 
 # Use a minimal base image for the final image
 FROM alpine:latest
 
+# Install cron
+RUN apk add --no-cache cron
+
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy the Go executable from the builder stage
-COPY --from=builder /app/png-linux .
+COPY --from=builder /app/process-id-request .
 
 # Expose the port the app runs on
 EXPOSE 8080
 
 # Command to run the executable or keep container running
-CMD ["tail", "-f", "/dev/null"]
-#CMD ["./png-linux"]
+CMD ["service", "cron", "start", "&&", "crontab", "./cron/cronlist", "&&", "tail", "-f", "/dev/null"]
