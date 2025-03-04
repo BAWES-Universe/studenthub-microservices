@@ -1,4 +1,4 @@
 
 #Env setup 
  
-`RAILWAY_DOCKERFILE_PATH=./linear/Dockerfile-railway`
+`RAILWAY_DOCKERFILE_PATH=./linear/Dockerfile`

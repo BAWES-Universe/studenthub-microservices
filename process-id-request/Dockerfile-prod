@@ -21,7 +21,7 @@ ENV CHROME_PATH="/usr/lib/chromium"
 WORKDIR /app
 
 # Copy the rest of the application source code
-COPY ./process-id-request .
+COPY . .
 
 RUN cp .env.prod-server-railway .env.local
 
