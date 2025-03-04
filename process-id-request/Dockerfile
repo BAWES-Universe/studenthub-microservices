@@ -1,7 +1,7 @@
 # Start with the official Golang image to build the Go application
 FROM golang:1.23 AS builder
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     cron 
 
 # Set the working directory inside the container
