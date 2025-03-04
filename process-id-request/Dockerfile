@@ -1,10 +1,23 @@
 # Start with the official Golang image to build the Go application
-FROM golang:1.23 AS builder
+FROM golang:1.24 AS builder
 
 # Install cron with cleanup in the same layer to reduce image size
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends cron
-    
+#&& apt-get upgrade -y
+RUN apt-get update  && \
+    apt-get install -y --no-install-recommends cron 
+
+# Install Chromium and dependencies
+RUN apt-get install -y chromium --no-install-recommends && \
+    apt-get install -y libx11-xcb1 libxcomposite1 libxrandr2 \
+    libxi6 libatk-bridge2.0-0 libgtk-3-0 libnss3 libxss1 \
+    fonts-liberation libxcb1 gdebi-core xvfb && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set environment variables to use Chromium in headless mode
+ENV CHROME_BIN="/usr/bin/chromium"
+ENV CHROME_PATH="/usr/lib/chromium"
+
 # Set the working directory inside the container
 WORKDIR /app
 
@@ -12,7 +25,6 @@ WORKDIR /app
 COPY . .
 
 # Copy the Go module files and download dependencies
-#COPY go.mod go.sum ./
 RUN go mod tidy
 
 # Build the Go application
