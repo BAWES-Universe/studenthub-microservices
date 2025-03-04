@@ -8,12 +8,12 @@ RUN apt-get update && \
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Go module files and download dependencies
-COPY go.mod go.sum ./
-RUN go mod tidy
-
 # Copy the rest of the application source code
 COPY . .
+
+# Copy the Go module files and download dependencies
+#COPY go.mod go.sum ./
+RUN go mod tidy
 
 # Build the Go application
 RUN go build -o process-id-request 
