@@ -9,7 +9,7 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Copy the rest of the application source code
-COPY . .
+COPY ./process-id-request .
 
 # Copy the Go module files and download dependencies
 #COPY go.mod go.sum ./
