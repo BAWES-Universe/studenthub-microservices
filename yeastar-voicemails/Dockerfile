@@ -19,7 +19,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Expose port (optional: change to your app's specific port if necessary)
-EXPOSE 3001
+EXPOSE 3001/tcp
 
 RUN touch /var/log/cron.log
 

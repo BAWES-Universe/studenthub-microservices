@@ -48,7 +48,7 @@ RUN go build -o process-id-request
 #COPY --from=builder /app/process-id-request .
 
 # Expose the port the app runs on
-#EXPOSE 8080
+#EXPOSE 8080/tcp
 
 RUN touch /var/log/cron.log
 

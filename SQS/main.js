@@ -61,6 +61,7 @@ app.get("/receive", async (req, res) => {
     res.json(result);
 });
 
-app.listen(port, () => {
+//listen on any IPv4 address (0.0.0.0) or IPv6 address (::) 
+app.listen(port, '::', () => {
     console.log(`SQS app listening on port ${port}`)
 });

@@ -19,7 +19,7 @@ COPY . .
 RUN npm run build
 
 # Expose port (adjust if your app uses a different port)
-EXPOSE 3002
+EXPOSE 3002/tcp
 
 # Start the application
 CMD ["mintlify", "dev"] 

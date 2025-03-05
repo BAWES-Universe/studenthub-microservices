@@ -115,7 +115,8 @@ app.get('/download/:id', async (req, res) => {
     res.json(result);
 });
 
-app.listen(port, async () => {
+//listen on any IPv4 address (0.0.0.0) or IPv6 address (::) 
+app.listen(port, '::', async () => {
     await connectToDatabase();
 
     //listen to events 
