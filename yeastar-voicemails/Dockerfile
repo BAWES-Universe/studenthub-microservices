@@ -1,6 +1,9 @@
 # Use an official Node.js runtime as a parent image
 FROM node:18-slim
 
+RUN apt-get update && apt-get install -y \
+    cron 
+
 # Set the working directory in the container
 WORKDIR /app
 
@@ -16,8 +19,10 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Expose port (optional: change to your app's specific port if necessary)
-#EXPOSE 3000
+EXPOSE 3001
 
-# Command to run the application
-CMD ["node", "main.js"]
+RUN touch /var/log/cron.log
+
+# Command to run the executable or keep container running
+CMD ["sh", "-c", "service cron start && crontab ./cron/cronlist && node main.js"]
 

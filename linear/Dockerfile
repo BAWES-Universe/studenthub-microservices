@@ -10,7 +10,7 @@ COPY package*.json ./
 COPY .env.production .env 
 
 # Install dependencies
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy source code
 COPY . .
