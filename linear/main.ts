@@ -51,7 +51,7 @@ app.post('/create-issue', async (req, res) => {
 })
 
 //listen on any IPv4 address (0.0.0.0) or IPv6 address (::) 
-app.listen(port, '::', () => {
+app.listen(port, () => {
   console.log(`Linear app listening on port ${port}`)
 })
 
