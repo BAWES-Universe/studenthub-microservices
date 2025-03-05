@@ -122,5 +122,24 @@ app.listen(port, '::', async () => {
     //listen to events 
     //listenForNewVoicemails();
 
-    console.log(`App listening at http://localhost:${port}`);
-});
+    console.log(`Server running on port ${port} (IPv4 and IPv6)`);
+  }).on('error', (err) => {
+    if (err.syscall !== 'listen') {
+      throw err;
+    }
+    
+    // If IPv6 fails, fallback to IPv4
+    if (err.code === 'EADDRNOTAVAIL') {
+      app.listen(port, '0.0.0.0', async () => {
+        
+        await connectToDatabase();
+
+        //listen to events 
+        //listenForNewVoicemails();
+        
+        console.log(`Server running on port ${port} (IPv4 only)`);
+      });
+    } else {
+      throw err;
+    }
+  });

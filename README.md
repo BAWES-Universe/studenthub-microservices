@@ -126,8 +126,7 @@ server {
     }
 
     location /yeastar-voicemails/ {
-        proxy_pass http://yeastar-voicemails.railway.internal:3001/;  # Example: Forwarding requests to an API running on port 3001
-        proxy_set_header Host $host;
+        proxy_pass http://yeastar-voicemails.railway.internal:3001/;  # Example: Forwarding requests to an API running on port proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
