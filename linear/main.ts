@@ -11,7 +11,7 @@ const port = 3002
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 // Enable CORS for all routes
-app.use(cors());
+//app.use(cors());
  
 dotenv.config(); 
 
