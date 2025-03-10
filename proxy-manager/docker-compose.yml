@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  nginx:
+    build: .
+    ports:
+      - "80:80"
+    networks:
+      - microservices_network
+    restart: unless-stopped
+
+  yeastar-voicemails:
+    # Your yeastar-voicemails service configuration
+    image: yeastar-voicemails
+    networks:
+      microservices_network:
+        aliases:
+          - yeastar-voicemails.railway.internal
+
+  linear:
+    # Your linear service configuration
+    image: linear
+    networks:
+      microservices_network:
+        aliases:
+          - linear.railway.internal
+
+  doc-updater:
+    # Your doc-updater service configuration
+    image: doc-updater
+    networks:
+      microservices_network:
+        aliases:
+          - doc-updater.railway.internal
+
+networks:
+  microservices_network:
+    driver: bridge

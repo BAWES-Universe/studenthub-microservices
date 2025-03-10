@@ -7,11 +7,10 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-COPY .env.production .env 
+#COPY .env.production .env 
 
 # Install dependencies
-RUN npm install 
-#--legacy-peer-deps
+RUN npm install
 
 # Copy source code
 COPY . .
@@ -23,4 +22,4 @@ RUN npm run build
 EXPOSE 3002/tcp
 
 # Start the application
-CMD ["npm", "start"] 
+CMD ["mintlify", "dev"] 

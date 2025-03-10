@@ -1,0 +1,3 @@
+*/5 * * * * cd /app && /usr/bin/node ./console/sync.js && /usr/bin/node ./console/process.js >> /var/log/cron.log  2>&1 
+
+

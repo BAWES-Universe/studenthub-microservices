@@ -36,7 +36,21 @@ func main() {
 
 	err = godotenv.Load(envPath)
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		//log.Fatal("Error loading .env file from cwd", err, envPath)
+
+		//from docker
+		envPath = "/app/.env.local"
+		err = godotenv.Load(envPath)
+		if err != nil {
+			//log.Fatal("Error loading .env file from docker", err, envPath)
+
+			//from docker
+			envPath = "/app/process-id-request/.env.local"
+			err = godotenv.Load(envPath)
+			if err != nil {
+				log.Fatal("Error loading .env file", err)
+			}
+		}
 	}
 
 	start := time.Now()

@@ -25,3 +25,12 @@ TODO:
 - cron job setup in server
 - handling token expiry 
 
+# Railway 
+
+## staging 
+
+`RAILWAY_DOCKERFILE_PATH=./yeastar-voicemails/Dockerfile-staging`
+
+## prod 
+
+`RAILWAY_DOCKERFILE_PATH=./yeastar-voicemails/Dockerfile`

@@ -61,6 +61,20 @@ app.get("/receive", async (req, res) => {
     res.json(result);
 });
 
-app.listen(port, () => {
-    console.log(`SQS app listening on port ${port}`)
-});
+//listen on any IPv4 address (0.0.0.0) or IPv6 address (::) 
+app.listen(port, '::', () => {
+    console.log(`Server running on port ${port} (IPv4 and IPv6)`);
+  }).on('error', (err) => {
+    if (err.syscall !== 'listen') {
+      throw err;
+    }
+    
+    // If IPv6 fails, fallback to IPv4
+    if (err.code === 'EADDRNOTAVAIL') {
+      app.listen(port, '0.0.0.0', () => {
+        console.log(`Server running on port ${port} (IPv4 only)`);
+      });
+    } else {
+      throw err;
+    }
+  });

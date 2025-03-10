@@ -22,4 +22,14 @@ AKIAWMITDJRKXNWDOBNJ
 can reuse code available at /lib/sqs.js 
 
 
+# Railway 
+
+## staging 
+
+`RAILWAY_DOCKERFILE_PATH=./yeastar-websocket-client/Dockerfile-staging`
+
+## prod 
+
+`RAILWAY_DOCKERFILE_PATH=./yeastar-websocket-client/Dockerfile`
+
 
