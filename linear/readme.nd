@@ -9,6 +9,7 @@ docker run -p 3002:3002 -d linear-api
 
 # pm2 
 
+
 ## delete pm2
 pm2 delete linear-api   
 
