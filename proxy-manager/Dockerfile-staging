@@ -21,4 +21,5 @@ RUN echo "Hello from Nginx!" > /var/www/html/index.html
 EXPOSE 80
 #EXPOSE 443
 
+
 CMD ["nginx", "-g", "daemon off;"]
