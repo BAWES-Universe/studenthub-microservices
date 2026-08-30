@@ -1,0 +1,50 @@
+---
+title: 'Introduction'
+description: 'Example section for showcasing API endpoints'
+---
+
+<Note>
+  If you're not looking to build API reference documentation, you can delete
+  this section by removing the api-reference folder.
+</Note>
+
+## Welcome
+
+There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+
+<Card
+  title="Plant Store Endpoints"
+  icon="leaf"
+  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+>
+  View the OpenAPI specification file
+</Card>
+
+## Authentication
+
+All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+
+```json
+"security": [
+  {
+    "bearerAuth": []
+  }
+]
+```
+
+## Rate Limits
+
+To ensure the quality of service, our API enforces rate limits. The current limit is set to 100 requests per hour per user. Users exceeding this limit will receive a `429 Too Many Requests` response code. We recommend implementing retry mechanisms with exponential backoff for handling rate limits gracefully.
+
+## Error Codes
+
+Understanding the error codes returned by our API is crucial for effective error handling in your application. Here are some common error codes you might encounter:
+
+- `400 Bad Request` - The request was unacceptable, often due to missing a required parameter.
+- `401 Unauthorized` - No valid API key was provided.
+- `403 Forbidden` - The API key doesn't have permissions to perform the request.
+- `404 Not Found` - The requested resource doesn't exist.
+- `429 Too Many Requests` - The request was throttled due to exceeding the rate limit.
+- `500, 502, 503, 504 Server Errors` - Something went wrong on our end. These are rare and should be reported.
+
+For handling these errors, we recommend checking the status code returned by our API and implementing appropriate error handling mechanisms in your application.
